@@ -50,7 +50,16 @@ element(E, cons(_, L)) :- element(E, L).
 % [_ | T] lista in cui non mi interessa delle testa ma voglio la coda
 % [E1, _ | _] lista che unifica con una lista che ha almeno 2 elementi e di cui voglio sapere il primo
 
+%position(L, N , E)
+%query di prova: position([10,20,30], zero, 10) oppure position([10,20,30], s(zero), 20)
+position([H|_], zero, H).
+position([H|T], s(N), E) :- position(T, N, E).
 
+% position ricorda molto una fold left
+
+%join(L1, L2, L)
+join([], L, L). %caso base
+join([H|T], L, [H|O]) :- join(T, L, O).
 
 
 
