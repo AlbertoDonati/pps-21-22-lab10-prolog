@@ -61,7 +61,12 @@ position([H|T], s(N), E) :- position(T, N, E).
 join([], L, L). %caso base
 join([H|T], L, [H|O]) :- join(T, L, O).
 
+% In prolog in realtà si possono usare anche i numeri
+% Proviamo la somma degli elementi di una lista
+%sum([10, 20, 30], N). --> N/60
 
+sum([], 0). %caso base
+sum([H|T], O) :- sum(T, N), O is H + N.
 
 
 
