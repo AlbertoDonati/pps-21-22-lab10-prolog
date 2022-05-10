@@ -34,3 +34,37 @@ size_peano([_ | Xs], s(N)) :- size_peano(Xs, N).
 sum([], 0).
 sum([X | Xs], R) :- sum(Xs, N), R is N + X.
 
+% ex 2.5 Quasi funzionante
+max(List, Max) :- max(List, Max, TempMax).
+max([X], X, X). %caso base
+max([X | Xs], X , _) :- max(Xs, Max, TempMax), X >= TempMax.
+max([X | Xs], TempMax , _) :- max(Xs, Max, TempMax), X < TempMax.
+
+% ex 2.6
+
+
+
+% ----------- Part 3 -----------
+
+% ex 3.1 
+
+same([], []).
+same([X | Xs], [X | Ys]) :- same(Xs, Ys).
+
+% ex 3.2 
+
+all_bigger([X], [Y]) :- X > Y.
+all_bigger([X | Xs], [Y | Ys]) :- all_bigger(Xs, Ys), X > Y.
+
+% ex 3.3
+
+sublist([], _).
+sublist([X | Xs], L) :- sublist(Xs, L), search(X, L).
+
+
+
+
+
+
+
+
