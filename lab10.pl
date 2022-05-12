@@ -34,15 +34,11 @@ size_peano([_ | Xs], s(N)) :- size_peano(Xs, N).
 sum([], 0).
 sum([X | Xs], R) :- sum(Xs, N), R is N + X.
 
-% ex 2.5 Quasi funzionante
-max(List, Max) :- max(List, Max, TempMax).
-max([X], X, X). %caso base
-max([X | Xs], X , _) :- max(Xs, Max, TempMax), X >= TempMax.
-max([X | Xs], TempMax , _) :- max(Xs, Max, TempMax), X < TempMax.
-
-% ex 2.6
-
-
+% ex 2.5 
+max([X | Xs], Max) :- max([X | Xs], Max, X).
+max([], Temp, Temp).
+max([X | Xs], Max, Temp) :- Temp > X, max(Xs, Max, Temp).
+max([X | Xs], Max, Temp) :- X >= Temp, max(Xs, Max, X).
 
 % ----------- Part 3 -----------
 
@@ -70,7 +66,12 @@ seq(N ,[0| T ]) :- N2 is N - 1, seq ( N2 ,T ).
 seqR(0, [0]).
 seqR(N, [N | T]) :- X is N - 1, seqR(X, T).
 
-% ex 4.2
+% ex 4.2 
+last2([], N, [N]).
+last2([X | Xs], N, [X | Ys]) :- last2(Xs, N, Ys).
+
+seqR2(0, [0]).
+seqR2(N, L) :- N >=0, last2(P, N, L), N2 is N-1, seqR2(N2, P).
 
 % ----------- Part 5 -----------
 
