@@ -61,10 +61,42 @@ all_bigger([X | Xs], [Y | Ys]) :- all_bigger(Xs, Ys), X > Y.
 sublist([], _).
 sublist([X | Xs], L) :- sublist(Xs, L), search(X, L).
 
+% ----------- Part 4 -----------
 
+seq(0 ,[]) .
+seq(N ,[0| T ]) :- N2 is N - 1, seq ( N2 ,T ).
 
+% ex 4.1
+seqR(0, [0]).
+seqR(N, [N | T]) :- X is N - 1, seqR(X, T).
 
+% ex 4.2
 
+% ----------- Part 5 -----------
+
+% Assume l is a List[Int]
+
+% l.last
+
+last([X], X).
+last([X | Xs], N) :- last(Xs, N).
+
+% l map (_ + 1)
+
+map([X], [Y]) :- Y is X + 1.
+map([X | Xs], [Y | Ys]) :- map(Xs, Ys), Y is X + 1.
+
+% l filter (_ > 0)
+
+filter([X], [X]) :- X > 0.
+filter([X], []) :- X =< 0.
+filter([X | Xs], [X | Ys]) :- filter(Xs, Ys), X > 0.
+filter([X | Xs], Ys) :- filter(Xs, Ys), X =< 0.
+
+% l.zip(l2)
+
+zip([X], [Y], [[X, Y]]).
+zip([X | Xs], [Y | Ys], [[X, Y] | Zs]) :- zip(Xs, Ys, Zs).
 
 
 
