@@ -34,12 +34,33 @@ size_peano([_ | Xs], s(N)) :- size_peano(Xs, N).
 sum([], 0).
 sum([X | Xs], R) :- sum(Xs, N), R is N + X.
 
+% 2.4
+% average ( List , Average )
+% it uses average ( List , Count , Sum , Average )
+average([H|T], A) :- average([H|T], 0, 0, A). % in this way solve the problem of 0/0 in an empty list
+average([], C, S, A) :- A is S/C.
+average([X|Xs], C, S, A) :- 
+	C2 is C + 1,
+	S2 is S + X,
+	average(Xs, C2, S2, A).
+
 % ex 2.5 
 max([X | Xs], Max) :- max([X | Xs], Max, X).
 max([], Temp, Temp).
 max([X | Xs], Max, Temp) :- Temp > X, max(Xs, Max, Temp).
 max([X | Xs], Max, Temp) :- X >= Temp, max(Xs, Max, X).
 
+% 2.6
+% max_min( List , Max , Min )
+% Max is the biggest element in List
+% Min is the smallest element in List
+% Suppose the list has at least one element
+% Version with temps, below version without
+max_min([H|T], Max, Min) :- max_min([H|T], Max, Min, H, H).
+max_min([], TMax, TMin, TMax, TMin).
+max_min([H|T], Max, Min, TMax, TMin) :- TMax > H, TMin =< H, max_min(T, Max, Min, TMax, TMin).
+max_min([H|T], Max, Min, TMax, TMin) :- TMax > H, H < TMin, max_min(T, Max, Min, TMax, H).
+max_min([H|T], Max, Min, TMax, TMin) :- H >= TMax, max_min(T, Max, Min, H, TMin).
 % ----------- Part 3 -----------
 
 % ex 3.1 
@@ -59,19 +80,21 @@ sublist([X | Xs], L) :- sublist(Xs, L), search(X, L).
 
 % ----------- Part 4 -----------
 
+ex 4.1
 seq(0 ,[]) .
 seq(N ,[0| T ]) :- N2 is N - 1, seq ( N2 ,T ).
 
-% ex 4.1
+% ex 4.2
 seqR(0, [0]).
 seqR(N, [N | T]) :- X is N - 1, seqR(X, T).
 
-% ex 4.2 
-last2([], N, [N]).
-last2([X | Xs], N, [X | Ys]) :- last2(Xs, N, Ys).
+% ex 4.3
 
 seqR2(0, [0]).
 seqR2(N, L) :- N >=0, last2(P, N, L), N2 is N-1, seqR2(N2, P).
+
+last2([], N, [N]).
+last2([X | Xs], N, [X | Ys]) :- last2(Xs, N, Ys).
 
 % ----------- Part 5 -----------
 
@@ -98,6 +121,3 @@ filter([X | Xs], Ys) :- filter(Xs, Ys), X =< 0.
 
 zip([X], [Y], [[X, Y]]).
 zip([X | Xs], [Y | Ys], [[X, Y] | Zs]) :- zip(Xs, Ys, Zs).
-
-
-
