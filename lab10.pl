@@ -70,7 +70,7 @@ same([X | Xs], [X | Ys]) :- same(Xs, Ys).
 
 % ex 3.2 
 
-all_bigger([X], [Y]) :- X > Y.
+all_bigger([], []).
 all_bigger([X | Xs], [Y | Ys]) :- all_bigger(Xs, Ys), X > Y.
 
 % ex 3.3
@@ -107,7 +107,7 @@ last([X | Xs], N) :- last(Xs, N).
 
 % l map (_ + 1)
 
-map([X], [Y]) :- Y is X + 1.
+map([], []).
 map([X | Xs], [Y | Ys]) :- map(Xs, Ys), Y is X + 1.
 
 % l filter (_ > 0)
