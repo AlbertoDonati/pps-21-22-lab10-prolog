@@ -13,7 +13,7 @@ search2(X, [_ | Xs]) :- search2(X, Xs).
 % search2(a,L). --> a a
 
 % ex 1.3
-search_two(X, [X, _, X | _]).
+search_two(X, [X, Y, X | _]) :- X \= Y.
 search_two(X, [_ | Xs]) :- search_two(X, Xs).
 
 % ex 1.4
